@@ -1,18 +1,12 @@
-<html>
-    <head>
-        <title>Yuto's blog</title>
-    </head>
-    <body>
-        <p>がもティは可愛い。</p>
-        <div>
-            <h1><a href="/">ゆうとのブログ</a></h1>
-        </div>
-        {% for post in posts %}
-            <div>
-                <p>公開日：　{{post.published_date}}</p>
-                <h2><a href="">{{post.title}}</a></h2>
-                <p>{{ post.text|linebreaksbr}}</p>
+{% extends 'blog/base.html' %}
+{% block content %}
+    {% for post in posts %}
+        <div class="post">
+            <div class="date">
+                <p>published: {{ post.published_date }}</p>
             </div>
-        {% endfor %}
-    </body>
-</html>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
